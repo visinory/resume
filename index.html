@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roshan Kumar Jha - Resume</title>
+  <style>
+    body {
+      font-family: "Times New Roman", Times, serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 25px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .header .logo img {
+      width: 125px; /* Adjust size as needed */
+      height: 125px; /* Adjust size as needed */
+      border-radius: 50%; /* Makes the logo circular */
+      margin-left: 15px; /* Adds space between logo and text */
+      padding: 15px;
+    }
+    .header .text {
+      text-align: left;
+    }
+    .header .text h1 {
+      font-size: 2.0rem;
+      color: black;
+      margin: 0;
+      /* margin-bottom: 4px; */
+    }
+    .header .text h2 {
+      font-size: 1.2rem;
+      color: #6c757d;
+      margin: 5px 0;
+    }
+    .header .text p {
+      font-size: 1.1rem;
+      color: #495057;
+      margin: 0;
+    }
+    .contact {
+      text-align: center;
+      margin-bottom: 30px;
+      margin-left: 88px;
+    }
+    .contact a {
+      text-decoration: none;
+      color: #0d6efd;
+      margin: 0 15px;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+    }
+    .contact a img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    } 
+    .download-button {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .download-button a {
+      text-decoration: none;
+      padding: 10px 30px;
+      background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+      background-size: 200%;
+      color: #fff;
+      border: 2px solid black;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-position 0.4s ease, color 0.4s ease;
+    }
+    .download-button a:hover {
+      background-position: 100%;
+      color: black;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h3 {
+      font-size: 1.5rem;
+      color: teal;
+      border-bottom: 2px solid black;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+      background-color: whitesmoke;
+    }
+    ul {
+      list-style: circle;
+      padding: 0;
+      margin-left: 25px;
+    }
+    ul li {
+      margin-bottom: 10px;
+      color: #495057;
+    }
+    .badge {
+      display: inline-block;
+      color: rgb(25, 22, 22);
+      padding: 5px 12px;
+      background: rgb(158, 220, 220);
+      border-radius: 15px;
+      font-size: 0.9rem;
+      margin-right: 5px;
+    }
+    .Badge {
+      margin-left: 25px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Header with Logo -->
+    <div class="header">
+      <div class="logo">
+        <img src="mylogo.jpg" alt="Logo">
+      </div>
+      <div class="text">
+        <h1>Roshan Kumar Jha</h1>
+        <h2>AI & Web Development Enthusiast</h2>
+        <p><small>An AI and web development enthusiast passionate about building innovative solutions. With hands-on
+            projects like AI personal assistants and weather forecasting app, I love turning ideas into impactful tech
+            experiences!</small></p>
+      </div>
+    </div>
+    
+    <!-- Contact Section -->
+    <div class="contact">
+      <a href="http://www.linkedin.com/in/roshan-kumar-747a6325a" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">http://www.linkedin.com/in/rosn-jha</a>
+      <a href="mailto:connect.rosn@gmail.com">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Mail Logo">connect.rosn@gmail.com</a>
+      <a href="tel:+916363493731">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Phone_icon.png" alt="Call Logo">+91-6363493731</a>
+    </div>
+    
+    <!-- Other Sections -->
+    <div class="section">
+      <h3>Education</h3>
+      <ul>
+        <li><strong>Bachelor of Engineering/CSE</strong> - Sri Krishna Institute of Technology (09/2022 - Present) | GPA: 8.2/10</li>
+        <li><strong>Higher Secondary Education</strong> - Model Multiple College (08/2021 - 08/2022) | GPA: 3.30/4</li>
+        <li><strong>Secondary Education</strong> - Mithila Institute of Technology (08/2020 - 08/2021) | GPA: 3.40/4</li>
+      </ul>
+    </div>
+    
+    <div class="section">
+      <h3>Personal Projects</h3>
+      <ul>
+        <li><strong>AI Personal Assistant - DeVen</strong><br> An AI-powered personal assistant featuring voice recognition, real-time task management, and a custom GUI using PyQt5.</li>
+        <li><strong>Weather Forecast Web Page - AtmosAlert</strong><br> Real-time, location-based weather updates with an intuitive Glassmorphism design. <br><a href="https://weather-forecasting-page.web.app/"><u>AtmosAlert</u></a>: https://weather-forecasting-page.web.app/</li>
+      </ul>
+    </div>
+    
+    <div class="section">
+      <h3>Skills</h3>
+      <p class="Badge">
+        <span class="badge">HTML</span>
+        <span class="badge">CSS</span>
+        <span class="badge">JavaScript</span>
+        <span class="badge">C</span>
+        <span class="badge">Python</span>
+        <span class="badge">SQL</span>
+      </p>
+    </div>
+    
+    <div class="section">
+      <h3>Certificates</h3>
+      <ul>
+        <li><strong>Data Structures and Algorithms</strong> - Infosys Springboard</li>
+        <li><strong>Ethical Cyber Security</strong> - Ethical Byte</li>
+      </ul>
+    </div>
+    
+    <div class="section">
+      <h3>Languages</h3>
+      <ul>
+        <li><b>English</b> - Full Professional Proficiency</li>
+        <li><b>Hindi</b> - Full Professional Proficiency</li>
+        <li><b>Nepali</b> - Full Professional Proficiency</li>
+      </ul>
+    </div>
+    
+    <div class="section">
+      <h3>Interests</h3>
+      <ul>
+        <li><p>Artificial Intelligence, Web Development, Technology Innovation, Programming</p></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="download-button">
+    <a href="#" onclick="downloadResume()">Download Resume</a>
+  </div>
+
+  <script>
+    async function downloadResume() {
+    const { jsPDF } = window.jspdf;
+    const element = document.querySelector(".container");
+
+    // Preload images and check if all are loaded
+    const images = document.querySelectorAll('img');
+    let loadedImages = 0;
+    const totalImages = images.length;
+
+    function checkAllImagesLoaded() {
+        if (loadedImages === totalImages) {
+        generatePDF();
+        }
+    }
+
+    images.forEach((img) => {
+        if (img.complete) {
+        loadedImages++;
+        } else {
+        img.onload = () => {
+            loadedImages++;
+            checkAllImagesLoaded();
+        };
+        }
+    });
+
+    checkAllImagesLoaded();
+
+    async function generatePDF() {
+        const canvas = await html2canvas(element, {
+        scale: 3,  // Increase scale for higher quality
+        useCORS: true, // Allow cross-origin image requests
+        });
+        const imgData = canvas.toDataURL("image/png");
+
+        const doc = new jsPDF();
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        // Add the image to the PDF
+        doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        doc.save("Roshan_Kumar_Jha_Resume.pdf");
+    }
+    }
+  </script>
+</body>
+</html>
