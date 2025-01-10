@@ -27,10 +27,10 @@
       margin-bottom: 30px;
     }
     .header .logo img {
-      width: 125px; /* Adjust size as needed */
-      height: 125px; /* Adjust size as needed */
-      border-radius: 50%; /* Makes the logo circular */
-      margin-left: 15px; /* Adds space between logo and text */
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      margin-left: 15px;
       padding: 15px;
     }
     .header .text {
@@ -40,7 +40,6 @@
       font-size: 2.0rem;
       color: black;
       margin: 0;
-      /* margin-bottom: 4px; */
     }
     .header .text h2 {
       font-size: 1.2rem;
@@ -69,7 +68,7 @@
       width: 20px;
       height: 20px;
       margin-right: 10px;
-    } 
+    }
     .download-button {
       text-align: center;
       margin-bottom: 30px;
@@ -121,6 +120,65 @@
     }
     .Badge {
       margin-left: 25px;
+    }
+
+    /* Media Queries for Tablets (768px and smaller) */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .header .logo img {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 15px;
+      }
+      .header .text {
+        text-align: center;
+      }
+      .contact a {
+        font-size: 0.9rem;
+        margin: 5px 0;
+        display: block;
+      }
+    }
+
+    /* Media Queries for Phones (480px and smaller) */
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+      .header .text h1 {
+        font-size: 1.5rem;
+      }
+      .header .text h2 {
+        font-size: 1rem;
+      }
+      .header .text p {
+        font-size: 0.9rem;
+      }
+      .contact {
+        margin-left: 0;
+      }
+      .contact a {
+        font-size: 0.85rem;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .download-button a {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+      }
+      .section h3 {
+        font-size: 1.2rem;
+      }
+      ul li {
+        font-size: 0.9rem;
+      }
+      .badge {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+      }
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
@@ -214,37 +272,36 @@
 
   <script>
     async function downloadResume() {
-    const { jsPDF } = window.jspdf;
-    const element = document.querySelector(".container");
+      const { jsPDF } = window.jspdf;
+      const element = document.querySelector(".container");
 
-    // Preload images and check if all are loaded
-    const images = document.querySelectorAll('img');
-    let loadedImages = 0;
-    const totalImages = images.length;
+      const images = document.querySelectorAll('img');
+      let loadedImages = 0;
+      const totalImages = images.length;
 
-    function checkAllImagesLoaded() {
+      function checkAllImagesLoaded() {
         if (loadedImages === totalImages) {
-        generatePDF();
+          generatePDF();
         }
-    }
+      }
 
-    images.forEach((img) => {
+      images.forEach((img) => {
         if (img.complete) {
-        loadedImages++;
+          loadedImages++;
         } else {
-        img.onload = () => {
+          img.onload = () => {
             loadedImages++;
             checkAllImagesLoaded();
-        };
+          };
         }
-    });
+      });
 
-    checkAllImagesLoaded();
+      checkAllImagesLoaded();
 
-    async function generatePDF() {
+      async function generatePDF() {
         const canvas = await html2canvas(element, {
-        scale: 3,  // Increase scale for higher quality
-        useCORS: true, // Allow cross-origin image requests
+          scale: 3,
+          useCORS: true,
         });
         const imgData = canvas.toDataURL("image/png");
 
@@ -252,10 +309,9 @@
         const pdfWidth = doc.internal.pageSize.getWidth();
         const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-        // Add the image to the PDF
         doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         doc.save("Roshan_Kumar_Jha_Resume.pdf");
-    }
+      }
     }
   </script>
 </body>
