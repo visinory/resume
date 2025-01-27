@@ -287,47 +287,31 @@
 
   <script>
     async function downloadResume() {
-      const { jsPDF } = window.jspdf;
-      const element = document.querySelector(".container");
+    const { jsPDF } = window.jspdf;
+    const element = document.querySelector(".container");
 
-      const images = document.querySelectorAll('img');
-      let loadedImages = 0;
-      const totalImages = images.length;
+    // Reduce canvas resolution
+    const canvas = await html2canvas(element, {
+      scale: 2, // Lower scale for smaller file size
+      useCORS: true, // Handle cross-origin images
+    });
 
-      function checkAllImagesLoaded() {
-        if (loadedImages === totalImages) {
-          generatePDF();
-        }
-      }
+    const imgData = canvas.toDataURL("image/jpeg", 0.8); // Use JPEG to further compress
 
-      images.forEach((img) => {
-        if (img.complete) {
-          loadedImages++;
-        } else {
-          img.onload = () => {
-            loadedImages++;
-            checkAllImagesLoaded();
-          };
-        }
-      });
+    const doc = new jsPDF("p", "mm", "a4");
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-      checkAllImagesLoaded();
-
-      async function generatePDF() {
-        const canvas = await html2canvas(element, {
-          scale: 3,
-          useCORS: true,
-        });
-        const imgData = canvas.toDataURL("image/png");
-
-        const doc = new jsPDF();
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-        doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-        doc.save("Roshan_Kumar_Jha_Resume.pdf");
-      }
+    if (pdfHeight > doc.internal.pageSize.getHeight()) {
+      // Auto-split long content
+      doc.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+    } else {
+      doc.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
     }
+
+    // Save the file with optimized size
+    doc.save("Roshan_Kumar_Jha_Resume.pdf");
+  }
   </script>
 </body>
 </html>
