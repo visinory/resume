@@ -290,27 +290,32 @@
       const { jsPDF } = window.jspdf;
       const element = document.querySelector(".container");
 
+      // Hide the download button before capturing
+      const downloadButton = document.getElementById("downloadBtn");
+      if (downloadButton) downloadButton.style.display = "none";
+
+      // Ensure page is fully visible on mobile
+      window.scrollTo(0, 0);
+
       const canvas = await html2canvas(element, {
-          scale: 2, // Higher scale for better clarity
-          scrollY: -window.scrollY, // Capture full page
+          scale: window.innerWidth <= 768 ? 3 : 2, // Higher scale for mobile
           useCORS: true
       });
 
-      const imgData = canvas.toDataURL("image/jpeg", 0.7); // Reduce quality to keep size < 1MB
+      const imgData = canvas.toDataURL("image/jpeg", 0.7); // Compress to keep size <1MB
 
       const doc = new jsPDF("p", "mm", "a4");
       const pdfWidth = doc.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-      doc.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight); // Single page
+      doc.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
 
       // Check size and adjust compression if needed
       const pdfOutput = doc.output("blob");
       if (pdfOutput.size > 1000000) { // If larger than 1MB
           doc.deletePage(1);
           const canvasLowQuality = await html2canvas(element, {
-              scale: 1.5, // Reduce scale to lower size
-              scrollY: -window.scrollY,
+              scale: window.innerWidth <= 768 ? 2 : 1.5,
               useCORS: true
           });
           const imgLowQuality = canvasLowQuality.toDataURL("image/jpeg", 0.5);
@@ -318,6 +323,9 @@
       }
 
       doc.save("Roshan_Kumar_Jha_Resume.pdf");
+
+      // Restore the download button visibility
+      if (downloadButton) downloadButton.style.display = "block";
   }
   </script>
 </body>
