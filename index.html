@@ -31,7 +31,7 @@
       height: 125px;
       border-radius: 50%;
       margin-left: 15px;
-      padding: 15px;
+      padding: 10px;
     }
     .header .text {
       text-align: left;
@@ -287,30 +287,37 @@
 
   <script>
     async function downloadResume() {
-    const { jsPDF } = window.jspdf;
-    const element = document.querySelector(".container");
+      const { jsPDF } = window.jspdf;
+      const element = document.querySelector(".container");
 
-    // Reduce canvas resolution
-    const canvas = await html2canvas(element, {
-      scale: 2, // Lower scale for smaller file size
-      useCORS: true, // Handle cross-origin images
-    });
+      const canvas = await html2canvas(element, {
+          scale: 2, // Higher scale for better clarity
+          scrollY: -window.scrollY, // Capture full page
+          useCORS: true
+      });
 
-    const imgData = canvas.toDataURL("image/jpeg", 0.8); // Use JPEG to further compress
+      const imgData = canvas.toDataURL("image/jpeg", 0.7); // Reduce quality to keep size < 1MB
 
-    const doc = new jsPDF("p", "mm", "a4");
-    const pdfWidth = doc.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const doc = new jsPDF("p", "mm", "a4");
+      const pdfWidth = doc.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-    if (pdfHeight > doc.internal.pageSize.getHeight()) {
-      // Auto-split long content
-      doc.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
-    } else {
-      doc.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
-    }
+      doc.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight); // Single page
 
-    // Save the file with optimized size
-    doc.save("Roshan_Kumar_Jha_Resume.pdf");
+      // Check size and adjust compression if needed
+      const pdfOutput = doc.output("blob");
+      if (pdfOutput.size > 1000000) { // If larger than 1MB
+          doc.deletePage(1);
+          const canvasLowQuality = await html2canvas(element, {
+              scale: 1.5, // Reduce scale to lower size
+              scrollY: -window.scrollY,
+              useCORS: true
+          });
+          const imgLowQuality = canvasLowQuality.toDataURL("image/jpeg", 0.5);
+          doc.addImage(imgLowQuality, "JPEG", 0, 0, pdfWidth, (canvasLowQuality.height * pdfWidth) / canvasLowQuality.width);
+      }
+
+      doc.save("Roshan_Kumar_Jha_Resume.pdf");
   }
   </script>
 </body>
